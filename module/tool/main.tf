@@ -1,10 +1,9 @@
 resource "aws_instance" "tool" {
 
-
   ami                    = data.aws_ami.ami_img.image_id
   vpc_security_group_ids = [data.aws_security_group.sec_grp.id]
   instance_type          = var.instance_type
-  iam_instance_profile   = aws_iam_instance_profile.instance_profile.name
+  iam_instance_profile   = aws_iam_instance_profile.instance_profile.name  #added in Session 26
   tags = {
     Name=var.tool_name
   }
@@ -39,6 +38,24 @@ resource "aws_iam_role" "role" {
       },
     ]
   })
+
+#this is Inline policy inside IAM role
+
+inline_policy {
+  name = "${var.tool_name}-inline-policy"
+
+  policy = jsonencode({
+      Version = "2012-10-17"
+      Statement = [
+        {
+          Action   =  var.policy_resource_list
+          Effect   = "Allow"
+          Resource = "*"
+        },
+      ]
+    })
+  }
+
 
   tags = {
     Name = "${var.tool_name}-role"
