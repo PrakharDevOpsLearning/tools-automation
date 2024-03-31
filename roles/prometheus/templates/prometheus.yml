@@ -16,8 +16,7 @@ scrape_configs:
 #Relabelling in Session 27
 
     relabel_configs:
-      - source_labels: [_meta_ec2_tag_Name]
+      - source_labels: [__meta_ec2_tag_Name]
         target_label: name
-      - source_labels: [_meta_ec2_tag_env]
+      - source_labels: [__meta_ec2_tag_env]
         target_label: env
-
