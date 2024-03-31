@@ -2,6 +2,8 @@ global:
   scrape_interval: 15s
   evaluation_interval: 15s
 
+#Auto discovery of all ec2 instances in us-east region with filter on tag name monitor
+
 scrape_configs:
   - job_name: "ec2-node"
     ec2_sd_configs:
@@ -10,3 +12,12 @@ scrape_configs:
         filters:
           - name: tag:monitor
             values: ["yes","true"]
+
+#Relabelling in Session 27
+
+    relabel_configs:
+      - source_labels: [_meta_ec2_tag_Name]
+        target_label: name
+      - source_labels: [_meta_ec2_tag_env]
+        target_label: env
+
