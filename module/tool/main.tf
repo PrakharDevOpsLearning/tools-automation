@@ -20,14 +20,26 @@ resource "aws_instance" "tool" {
   }
 }
 
+# Route53 record with public IP
 
 resource "aws_route53_record" "record" {
-  name    = "${var.tool_name}"
+  name    = var.tool_name
   type    = "A"
   zone_id = var.zone_id
   records = [aws_instance.tool.public_ip]
   ttl     = 30
 }
+
+# Route53 record with private ip
+
+resource "aws_route53_record" "internal-record" {
+  name    = "${var.tool_name}-internal"
+  type    = "A"
+  zone_id = var.zone_id
+  records = [aws_instance.tool.private_ip]
+  ttl     = 30
+}
+
 
 #Below code has been added in Session 26, refer session notes why we added -
 
