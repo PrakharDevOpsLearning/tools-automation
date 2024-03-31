@@ -13,7 +13,7 @@
     src: prometheus.service
     dest: /etc/systemd/system/prometheus.service
 
-# added in session 27
+# added in session 27 (relabelling and SD config)
 
 - name: Copy prometheus configuration
   ansible.builtin.template:
