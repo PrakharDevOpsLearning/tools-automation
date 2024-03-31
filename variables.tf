@@ -4,6 +4,10 @@ variable "tools" {
       instance_type        = "t3.small"
       policy_resource_list = ["ec2:DescribeInstances"] #session 26
     }
+    grafana = {
+      instance_type        = "t3.small"
+      policy_resource_list = ["ec2:DescribeInstances"] #session 27
+    }
   }
 }
 
