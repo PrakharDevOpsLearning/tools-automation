@@ -18,6 +18,11 @@ resource "aws_instance" "tool" {
   tags = {
     Name=var.tool_name
   }
+
+  lifecycle {
+    ignore_changes = [ami,]
+
+  }
 }
 
 # Route53 record with public IP
