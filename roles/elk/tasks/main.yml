@@ -3,7 +3,7 @@
 
 - name: Copy repo file from template
   ansible.builtin.template:
-    src: elk.repo
+    src: elastic.repo
     dest: /etc/yum.repos.d/elastic.repo
 
 - name: Install elasticSearch
